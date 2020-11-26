@@ -1,19 +1,27 @@
 'use strict'
 
 class AuthController {
-    async register({ request }) {
-        const data = request.only(['email', 'password', 'name', 'cpf', 'birth', 'phone', 'role', 'description'])
-        const user = await User.create(data)
+  async register({
+    request
+  }) {
+    const data = request.only(['email', 'password', 'name', 'cpf', 'role', 'description'])
+    const user = await User.create(data)
 
-        return user
-    }
+    return user
+  }
 
-    async authenticate({ request, auth }) {
-        const { email, password } = request.all()
-        const token = await auth.attempt(email, password)
+  async authenticate({
+    request,
+    auth
+  }) {
+    const {
+      email,
+      password
+    } = request.all()
+    const token = await auth.attempt(email, password)
 
-        return token
-    }
+    return token
+  }
 }
 
 module.exports = AuthController
