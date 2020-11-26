@@ -4,22 +4,22 @@
 const Schema = use('Schema')
 
 class UserSchema extends Schema {
-  up () {
+  up() {
     this.create('users', (table) => {
       table.increments()
       table.string('email', 254).notNullable().unique()
       table.string('password', 60).notNullable()
       table.string('name', 90).notNullable()
       table.string('cpf', 11).notNullable()
-      table.date('birth').notNullable()
-      table.string('phone', 12).notNullable()
-      table.enu('role', ['client', 'barber'], { useNative: true }).notNullable()
+      table.enu('role', ['client', 'barber'], {
+        useNative: true
+      }).notNullable()
       table.string('description', 240)
       table.timestamps()
     })
   }
 
-  down () {
+  down() {
     this.drop('users')
   }
 }
