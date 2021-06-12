@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "appointments",
+  "info": {
+    "name": "appointments",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "dateTime": {
+      "type": "datetime",
+      "required": true,
+      "unique": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 10
+    },
+    "client": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "barber": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "service": {
+      "model": "services"
+    }
+  }
+}

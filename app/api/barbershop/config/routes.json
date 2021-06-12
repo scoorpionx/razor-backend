@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/barbershops",
+      "handler": "barbershop.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/barbershops/count",
+      "handler": "barbershop.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/barbershops/:id",
+      "handler": "barbershop.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/barbershops",
+      "handler": "barbershop.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/barbershops/:id",
+      "handler": "barbershop.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/barbershops/:id",
+      "handler": "barbershop.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

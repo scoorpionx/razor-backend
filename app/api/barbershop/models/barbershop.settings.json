@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "barbershops",
+  "info": {
+    "name": "Barbershop",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "barbeshop_name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 40
+    },
+    "cnpj": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 20
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "phones": {
+      "collection": "phones"
+    },
+    "address": {
+      "model": "address"
+    }
+  }
+}

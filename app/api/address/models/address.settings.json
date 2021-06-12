@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addresses",
+  "info": {
+    "name": "address",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "complement": {
+      "type": "richtext",
+      "required": true,
+      "maxLength": 45
+    },
+    "zipcode": {
+      "type": "string",
+      "required": true,
+      "maxLength": 9
+    },
+    "latitude": {
+      "type": "float",
+      "required": true
+    },
+    "longitude": {
+      "type": "float",
+      "required": true
+    }
+  }
+}
