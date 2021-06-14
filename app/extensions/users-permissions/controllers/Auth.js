@@ -506,15 +506,27 @@ module.exports = {
         params.confirmed = true;
       }
 
-      const user = await strapi
+      let user = await strapi
         .query("user", "users-permissions")
         .create(params);
 
       if (files) {
-        await strapi.entityService.uploadFiles(user, files, {
-          model: strapi.plugins["users-permissions"].models.user,
-        });
-      }
+	try {
+          await strapi.plugins.upload.services.upload.upload({
+            data: {
+              refId: user.id,
+              ref: "user",
+	      source: "users-permissions",
+	      field: "image"
+            },
+           ...files,
+          });
+	  user = await strapi.query("user", "users-permissions").findOne({ id: user.id });
+	  ctx.send(user);
+	} catch (e) {
+	  console.log(e);
+	};
+      };
 
       const sanitizedUser = sanitizeEntity(user, {
         model: strapi.query("user", "users-permissions").model,
