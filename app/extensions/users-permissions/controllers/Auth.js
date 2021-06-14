@@ -11,7 +11,6 @@ const crypto = require("crypto");
 const _ = require("lodash");
 const grant = require("grant-koa");
 const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
-const uploadFiles = require("strapi/lib/core-api/utils/upload-files");
 
 const emailRegExp =
   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -512,7 +511,7 @@ module.exports = {
         .create(params);
 
       if (files) {
-        await uploadFiles(user, files, {
+        await strapi.entityService.uploadFiles(user, files, {
           model: strapi.plugins["users-permissions"].models.user,
         });
       }
