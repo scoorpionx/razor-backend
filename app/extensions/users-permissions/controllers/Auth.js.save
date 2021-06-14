@@ -21,7 +21,7 @@ const formatError = (error) => [
 module.exports = {
   async callback(ctx) {
     const provider = ctx.params.provider || "local";
-    const params = ctx.request.body;
+    const params = data;
 
     const store = await strapi.store({
       environment: "",
@@ -506,27 +506,23 @@ module.exports = {
         params.confirmed = true;
       }
 
-      let user = await strapi
+      const user = await strapi
         .query("user", "users-permissions")
         .create(params);
 
       if (files) {
+	console.log(user);
 	try {
           await strapi.plugins.upload.services.upload.upload({
-            data: {
-              refId: user.id,
-              ref: "user",
-	      source: "users-permissions",
-	      field: "image"
-            },
-           ...files,
-          });
-	  user = await strapi.query("user", "users-permissions").findOne({ id: user.id });
-	  ctx.send(user);
-	} catch (e) {
-	  console.log(e);
-	};
-      };
+  	        data: {
+            refId: user.id,
+            ref: "user",
+	    source: "users-permissions",
+	    field: "image"
+          },
+          files,
+        });
+      }
 
       const sanitizedUser = sanitizeEntity(user, {
         model: strapi.query("user", "users-permissions").model,
